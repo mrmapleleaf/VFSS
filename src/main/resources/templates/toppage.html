@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<link href="/css/header.css" th:href="@{/css/header.css}" rel="stylesheet">
+<link href="/css/footer.css" th:href="@{/css/footer.css}" rel="stylesheet">
+<link href="/css/content.css" th:href="@{/css/content.css}" rel="stylesheet">
+<meta charset="UTF-8">
+<title>VFSS</title>
+</head>
+<body>
+	<div th:replace="common/header::headerA"></div>
+	<div class="content">
+		<h1>あなたが登録してるそのサブスク<br>本当に使ってますか？</h1>
+		<div>
+			<p>最近流行りのサブスク。あなたは幾つ登録していますか？</p>
+			<p>月額料金制である故に価格を安く感じ、登録して、満足に使わないまま料金を払い続ける...。</p>
+			<p>気づけばかさんだ費用は膨大になっているかもしれません。</p>
+			<p>VFSS(Visualizing fear of Subscription Service)はサブスクリプションサービスの費用を可視化するサービスです。</p>
+			<p>あなたが使っているサブスクを登録し、今までにいくら使ったかを確認して、無駄遣いを減らしましょう！</p>
+		</div>
+	</div>
+	<div th:replace="common/footer::footer"></div>
+</body>
+</html>

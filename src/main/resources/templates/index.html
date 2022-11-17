@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<link href="/css/header.css" th:href="@{/css/header.css}" rel="stylesheet">
+<link href="/css/footer.css" th:href="@{/css/footer.css}" rel="stylesheet">
+<link href="/css/content.css" th:href="@{/css/content.css}" rel="stylesheet">
+<meta charset="UTF-8">
+<title>ホーム</title>
+</head>
+<body>
+	<div th:replace="common/header::headerA"></div>
+	<div class="content">
+	<h1>登録成功！</h1>
+	</div>
+	<div th:replace="common/footer::footerA"></div>
+</body>
+</html>

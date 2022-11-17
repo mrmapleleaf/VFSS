@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<header th:fragment="headerA" class="site_header">
+	<div class="header_wrapper">
+		<a class="brand">VFSS</a>
+		<nav>
+			<ul class="header_ul">
+				<li class="header_item"><a class="header_button" href="#" th:href="@{/login}">ログイン</a></li>
+				<li class="header_item"><a class="header_button" href="#" th:href="@{/createUser}">新規登録</a></li>
+			</ul>
+		</nav>
+	</div>
+	</header>
+</html>
