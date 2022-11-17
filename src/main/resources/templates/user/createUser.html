@@ -9,12 +9,12 @@
 <body>
 	<div th:replace="common/header::headerA"></div>
 		<h1>新規ユーザー登録画面予定</h1>
-		<form method="POST" th:action="@{/insert}" th:object="${taskForm}">
+		<form method="POST" th:action="@{/createUser/insert}" th:object="${userForm}">
 			<label>ユーザーID</label>
-			<div th:if="${#fields.hasError('userId')}" th:error="*{userId}"></div>
-			<input type="text" name="userId" th:value="$(userId)}"><br>
+			<div th:if="${#fields.hasErrors('userId')}" th:errors="*{userId}"></div>
+			<input type="text" name="userId" th:value="${userId}"><br>
 			<label>パスワード</label>
-			<div th:if="${#fields.hasError('password')}" th:error="*{password}"></div>
+			<div th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></div>
 			<input type="password" name="password" th:value="${password}"><br>
 			<input type="submit" value="登録">
 		</form>
