@@ -58,4 +58,12 @@ public class UserDAOImpl implements UserDAO {
 		return 0;
 	}
 
+	@Override
+	public int checkRegisteredUserId(String userId) {
+		String sql = "select count(userId) from USERS where userId = ?" ;
+		Map<String, Object> result = jdbctemplate.queryForMap(sql, userId);
+		
+		return result.size();
+	}
+
 }

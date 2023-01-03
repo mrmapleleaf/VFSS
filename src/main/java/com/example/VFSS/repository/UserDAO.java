@@ -13,4 +13,6 @@ public interface UserDAO {
 	int update(User user);
 	
 	int delete(int id);
+	
+	int checkRegisteredUserId(String userId);
 }

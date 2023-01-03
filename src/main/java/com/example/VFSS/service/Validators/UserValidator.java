@@ -1,18 +1,26 @@
 package com.example.VFSS.service.Validators;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.example.VFSS.entity.User;
-import com.example.VFSS.repository.UserDAO;
-import com.example.VFSS.repository.UserDAOImpl;
 
 public class UserValidator {
 
-	@Autowired
-	private final UserDAO userDao;
-	
-	public UserValidator(UserDAOImpl userDaoImpl) {
-		this.userDao = userDaoImpl;
+	public static List<String> validate(User user) {
+		List<String> errorList = new ArrayList<>();
+		
+		String userIdError = validateCharacterOfUserID(user);
+		if(!userIdError.equals("")) {
+			errorList.add(userIdError);
+		}
+		
+		String passwordError  = validateCharacterOfPassword(user);
+		if(!passwordError.equals("")) {
+			errorList.add(passwordError);
+		}
+		
+		return errorList;
 	}
 	
 	public static String validateCharacterOfUserID(User user) {
@@ -24,11 +32,9 @@ public class UserValidator {
 	
 	public static String validateCharacterOfPassword(User user) {
 		if(!user.getPassword().matches("[A-Za-z0-9]+")) {
-			return "パスワードには半角大文字か小文字の英字と半角数字のみを使用してください";
+			return "パスワードには半角大文字、小文字の英字、半角数字のみを使用してください";
 		}
 		return "";
 	}
-	
-	//ユーザーID被りをバリデーションする
 	
 }

@@ -1,6 +1,7 @@
 package com.example.VFSS.controller;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 import javax.validation.Valid;
 
@@ -42,16 +43,21 @@ public class CreateUserController {
 		
 			User user = new User();
 			user.setUserId(userForm.getUserId());
-			user.setPassword(user.getPassword());
+			user.setPassword(userForm.getPassword());
 			user.setCreatedAt(new Timestamp(System.currentTimeMillis()));
 			user.setUpdatedAt(new Timestamp(System.currentTimeMillis()));
 			user.setDeleteFlg(0);
 			
-			userService.insert(user);
+			List<String> errorList = userService.insert(user);
+			if(errorList.size() == 0) {
+				return "/index";
+			} else {
+				model.addAttribute("errorList", errorList);
+				return "user/createUser";
+			}
 			
-			return "/index";
 		} else {
-			model.addAttribute(userForm);
+			model.addAttribute("userForm", userForm);
 			return "user/createUser";
 		}
 	}

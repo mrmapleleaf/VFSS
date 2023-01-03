@@ -1,5 +1,6 @@
 package com.example.VFSS.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.example.VFSS.entity.User;
 import com.example.VFSS.repository.UserDAO;
 import com.example.VFSS.repository.UserDAOImpl;
+import com.example.VFSS.service.Validators.UserValidator;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -31,8 +33,20 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public void insert(User user) {
+	public List<String> insert(User user) {
+		
+		List<String> errorList = UserValidator.validate(user);
+		if(!(errorList.size() == 0)) {
+			return errorList;
+		}
+		
+		if(userDao.checkRegisteredUserId(user.getUserId()) != 0) {
+			errorList.add("このユーザーIDはすでに使用されています");
+			return errorList;
+		}
+		
 		userDao.insert(user);
+		return errorList;
 	}
 
 	@Override
@@ -46,5 +60,4 @@ public class UserServiceImpl implements UserService {
 		// TODO 自動生成されたメソッド・スタブ
 		return 0;
 	}
-
 }
