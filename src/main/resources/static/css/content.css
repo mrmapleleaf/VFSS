@@ -7,3 +7,28 @@
 #errorlist {
 	color :black;
 }
+
+#create_user_body {
+	margin-left: 20px;
+	margin-bottom: 20px;
+}
+
+#create_userId {
+	margin-top: 15px;
+	margin-bottom: 15px;
+}
+
+#create_user_buttom {
+	padding: 3px 25px 3px 25px;
+	margin-top: 10px;
+}
+
+#error_message  {
+	font-size: 3px;
+	color: orange;
+}
+
+#errorlist {
+	color:#FF3333;
+}
+

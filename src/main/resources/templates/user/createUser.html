@@ -4,28 +4,36 @@
 <link href="/css/header.css" th:href="@{/css/header.css}" rel="stylesheet">
 <link href="/css/footer.css" th:href="@{/css/footer.css}" rel="stylesheet">
 <link href="/css/content.css" th:href="@{/css/content.css}" rel="stylesheet">
+<script type= "text/javascript" src="/js/password_button.js"></script>
 <meta charset="UTF-8">
 <title>新規ユーザー登録画面</title>
 </head>
 <body>
 	<div th:replace="common/header::headerA"></div>
+	<div id="create_user_body">
 		<h1>新規ユーザー登録画面予定</h1>
 		<div th:if = "!${#lists.isEmpty(errorList)}"> 
 			<div  th:if = "${#lists.size(errorList) != 0}"> 
-			    <ul th:each = "error : ${errorList}">
+				 <ul th:each = "error : ${errorList}">
 					<li id="errorlist" th:text = "${error}"></li>
-				</ul>
+				</ul>	   
 			</div> 
 		</div>
 		<form method="POST" th:action="@{/createUser/insert}" th:object="${userForm}">
-			<label>ユーザーID</label>
-			<div th:if="${#fields.hasErrors('userId')}" th:errors="*{userId}"></div>
-			<input type="text" name="userId" th:value="${userId}"><br>
-			<label>パスワード</label>
-			<div th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></div>
-			<input type="password" name="password" th:value="${password}"><br>
-			<input type="submit" value="登録">
+			<div id="create_userId">
+				<label>ユーザーID</label><br>
+				<div id="error_message" th:if="${#fields.hasErrors('userId')}" th:errors="*{userId}"></div>
+				<input type="text" name="userId" th:value="${userId}"><br>
+			</div>
+			<div id="create_password">
+				<label>パスワード</label><br>
+				<div id="error_message" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></div>
+				<input type="password" name="password" id="input_pass" th:value="${password}">
+				<button id="btn_passview">表示</button><br>
+				<input id="create_user_buttom" type="submit" value="登録">
+			</div>
 		</form>
+	</div>
 	<div th:replace="common/footer::footer"></div>
 </body>
 </html>

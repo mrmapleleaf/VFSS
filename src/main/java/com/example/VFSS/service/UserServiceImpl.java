@@ -41,7 +41,7 @@ public class UserServiceImpl implements UserService {
 		}
 		
 		if(userDao.checkRegisteredUserId(user.getUserId()) != 0) {
-			errorList.add("このユーザーIDはすでに使用されています");
+			errorList.add("入力されたユーザーIDは既に使用されています");
 			return errorList;
 		}
 		
