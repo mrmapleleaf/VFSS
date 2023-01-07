@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.example.VFSS.entity.User;
 import com.example.VFSS.repository.UserDAO;
 import com.example.VFSS.repository.UserDAOImpl;
+import com.example.VFSS.service.Encrypto.CryptoHash;
 import com.example.VFSS.service.Validators.UserValidator;
 
 @Service
@@ -45,6 +46,7 @@ public class UserServiceImpl implements UserService {
 			return errorList;
 		}
 		
+		user.setPassword(CryptoHash.encryptoHash(user.getPassword()));
 		userDao.insert(user);
 		return errorList;
 	}

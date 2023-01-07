@@ -49,6 +49,7 @@ public class CreateUserController {
 			user.setDeleteFlg(0);
 			
 			List<String> errorList = userService.insert(user);
+
 			if(errorList.size() == 0) {
 				return "/index";
 			} else {
