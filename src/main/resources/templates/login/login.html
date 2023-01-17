@@ -3,12 +3,30 @@
 <head>
 <link href="/css/header.css" th:href="@{/css/header.css}" rel="stylesheet">
 <link href="/css/footer.css" th:href="@{/css/footer.css}" rel="stylesheet">
+<link href="/css/content.css" th:href="@{/css/content.css}" rel="stylesheet">
+<script type= "text/javascript" src="/js/password_button.js"></script>
 <meta charset="UTF-8">
 <title>ログイン画面</title>
 </head>
 <body>
-	<div th:replace="common/header::headerA"></div>
-		<h1>ログイン画面予定</h1>
+	<div th:replace="common/header::header"></div>
+	<div id="login_body">
+		<h1>ログイン</h1>
+		<form method="POST" th:action="@{/login/login}" th:object="${userForm}">
+			<div id="login_userId">
+				<label>ユーザーID</label><br>
+					<div id="error_message" th:if="${#fields.hasErrors('userId')}" th:errors="*{userId}"></div>
+				<input type="text" name="userId" th:value="*{userId}"><br>
+			</div>
+			<div id="login_password">
+				<label>パスワード</label><br>
+					<div id="error_message" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></div>
+				<input type="password" name="password" id="input_pass" th:value="*{password}">
+				<button id="btn_passview">表示</button><br>
+				<input id="login_user_buttom" type="submit" value="ログイン">
+			</div>
+		</form>
+	</div>
 	<div th:replace="common/footer::footer"></div>
 </body>
 </html>

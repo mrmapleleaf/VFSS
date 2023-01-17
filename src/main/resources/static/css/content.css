@@ -1,7 +1,9 @@
 @charset "UTF-8";
 
 .content {
-	height:auto;
+	height : auto;
+	margin-left: 20px;
+	margin-bottom: 20px;
 }
 
 #errorlist {
@@ -19,6 +21,21 @@
 }
 
 #create_user_buttom {
+	padding: 3px 25px 3px 25px;
+	margin-top: 10px;
+}
+
+#login_body {
+	margin-left: 20px;
+	margin-bottom: 20px;
+}
+
+#login_userId {
+	margin-top: 15px;
+	margin-bottom: 15px;
+}
+
+#login_user_buttom {
 	padding: 3px 25px 3px 25px;
 	margin-top: 10px;
 }

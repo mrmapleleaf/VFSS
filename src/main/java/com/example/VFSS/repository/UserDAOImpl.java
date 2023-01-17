@@ -1,6 +1,7 @@
 package com.example.VFSS.repository;
 
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -24,16 +25,13 @@ public class UserDAOImpl implements UserDAO {
 
 	@Override
 	public Optional<User> findUser(String userId, String password) {
-		String sql = "select userId, password, deleteFlg from USERS " + 
-						   "where userId = ? and password = ?";
+		String sql = "select userId, createdAt, updatedAt, deleteFlg from USERS where userId = ? and password = ?";
 		Map<String, Object> result = jdbctemplate.queryForMap(sql, userId, password);
-
+		System.out.println(result);
 		User user = new User();
-		user.setId((int)result.get("id"));
 		user.setUserId((String)result.get("userId"));
-		user.setPassword(((String)result.get("password")));
-		user.setCreatedAt((Timestamp)result.get("createdAt"));
-		user.setUpdatedAt((Timestamp)result.get("updatedAt"));
+		user.setCreatedAt(Timestamp.valueOf((LocalDateTime)result.get("createdAt")));
+		user.setCreatedAt(Timestamp.valueOf((LocalDateTime)result.get("updatedAt")));
 		user.setDeleteFlg((int)result.get("deleteFlg"));
 
 		Optional<User> userOpt = Optional.ofNullable(user);

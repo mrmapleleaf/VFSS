@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataAccessException;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import com.example.VFSS.entity.User;
@@ -27,8 +27,8 @@ public class UserServiceImpl implements UserService {
 	public Optional<User> findUser(String userId, String password) {
 		
 		try {
-			return userDao.findUser(userId, password);
-		} catch(DataAccessException e) {
+			return userDao.findUser(userId, CryptoHash.encryptoHash(password));
+		} catch(EmptyResultDataAccessException e) {
 			throw new UserNotFoundException("ユーザーが見つかりません。ユーザーID、パスワードが間違っている可能性があります。");
 		}
 	}
@@ -45,7 +45,7 @@ public class UserServiceImpl implements UserService {
 			errorList.add("入力されたユーザーIDは既に使用されています");
 			return errorList;
 		}
-		
+
 		user.setPassword(CryptoHash.encryptoHash(user.getPassword()));
 		userDao.insert(user);
 		return errorList;

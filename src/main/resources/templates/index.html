@@ -5,13 +5,16 @@
 <link href="/css/footer.css" th:href="@{/css/footer.css}" rel="stylesheet">
 <link href="/css/content.css" th:href="@{/css/content.css}" rel="stylesheet">
 <meta charset="UTF-8">
-<title>ホーム</title>
+<title>サブスク一覧</title>
 </head>
 <body>
-	<div th:replace="common/header::headerA"></div>
-	<div class="content">
-	<h1>登録成功！</h1>
-	</div>
+	<div th:replace="common/header::header"></div>
+		<div class="content">
+			<h1 th:if="${loginMessage != null}" th:text="${loginMessage}"></h1>
+			<h2>ユーザー情報</h2>
+			<p th:text="|ユーザーID：${session.loginUser.userId}|"></p>
+			<p th:text="|アカウント作成日付：${session.loginUser.createdAt}|"></p>
+		</div>
 	<div th:replace="common/footer::footer"></div>
 </body>
 </html>
