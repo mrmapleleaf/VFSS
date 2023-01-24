@@ -27,7 +27,7 @@ public class UserDAOImpl implements UserDAO {
 	public Optional<User> findUser(String userId, String password) {
 		String sql = "select userId, createdAt, updatedAt, deleteFlg from USERS where userId = ? and password = ?";
 		Map<String, Object> result = jdbctemplate.queryForMap(sql, userId, password);
-		System.out.println(result);
+
 		User user = new User();
 		user.setUserId((String)result.get("userId"));
 		user.setCreatedAt(Timestamp.valueOf((LocalDateTime)result.get("createdAt")));

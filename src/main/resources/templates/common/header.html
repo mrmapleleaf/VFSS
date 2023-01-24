@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 	<header th:fragment="header" class="site_header">
 	<div class="header_wrapper">
-		<a class="brand">VFSS</a>
+		<a class="brand" href="#" th:href="@{/toppage}"><img src="/img/logo.png"></a>
 		<nav th:if="${session.loginUser == null}">
 			<ul class="header_ul">
 				<li class="header_item"><a class="header_button" href="#" th:href="@{/login/form}">ログイン</a></li>

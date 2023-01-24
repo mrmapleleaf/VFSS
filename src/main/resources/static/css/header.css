@@ -17,9 +17,8 @@ ul {
 }
 
 .brand {
-	font-weight: bold;
-	font-size: 20px;
-	color: rgb(255, 255, 255);
+	display: flex;
+	height:60px;
 }
 
 .header_wrapper nav {
