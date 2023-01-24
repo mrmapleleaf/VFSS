@@ -12,6 +12,11 @@
 	<div th:replace="common/header::header"></div>
 	<div id="login_body">
 		<h1>ログイン</h1>
+		<div th:if="${errorMessage != null}">
+			<ul>
+				<li id="login_error_message"><p th:text="${errorMessage}"></p></li>
+			</ul>
+		</div>
 		<form method="POST" th:action="@{/login/login}" th:object="${userForm}">
 			<div id="login_userId">
 				<label>ユーザーID</label><br>

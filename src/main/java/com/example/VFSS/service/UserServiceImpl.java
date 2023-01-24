@@ -29,7 +29,7 @@ public class UserServiceImpl implements UserService {
 		try {
 			return userDao.findUser(userId, CryptoHash.encryptoHash(password));
 		} catch(EmptyResultDataAccessException e) {
-			throw new UserNotFoundException("ユーザーが見つかりません。ユーザーID、パスワードが間違っている可能性があります。");
+			return null;
 		}
 	}
 

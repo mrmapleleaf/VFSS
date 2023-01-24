@@ -45,10 +45,15 @@ public class LoginController {
 
 		if(!bindingResult.hasErrors()) {
 			Optional<User> OptionalLoginUser = userService.findUser(userForm.getUserId(), userForm.getPassword());
-			User loginUser = OptionalLoginUser.get();
-			redirectAttributes.addFlashAttribute("loginMessage", "ログインしました");
-			session.setAttribute("loginUser", loginUser);
-			return "redirect:/subscription/index";
+			if(OptionalLoginUser != null) {
+				User loginUser = OptionalLoginUser.get();
+				redirectAttributes.addFlashAttribute("loginMessage", "ログインしました");
+				session.setAttribute("loginUser", loginUser);
+				return "redirect:/subscription/index";
+			} else {
+				model.addAttribute("errorMessage", "ユーザーIDかパスワードが間違っています");
+				return "login/login";
+			}
 		} else {
 			model.addAttribute("userForm", userForm);
 			return "login/login";

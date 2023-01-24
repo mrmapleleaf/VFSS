@@ -15,7 +15,7 @@
 		<div th:if = "!${#lists.isEmpty(errorList)}"> 
 			<div  th:if = "${#lists.size(errorList) != 0}"> 
 				 <ul th:each = "error : ${errorList}">
-					<li id="errorlist" th:text = "${error}"></li>
+					<li id="create_user_error_message" th:text = "${error}"></li>
 				</ul>	   
 			</div> 
 		</div>

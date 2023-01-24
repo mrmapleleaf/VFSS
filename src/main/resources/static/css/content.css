@@ -6,8 +6,12 @@
 	margin-bottom: 20px;
 }
 
-#errorlist {
-	color :black;
+#login_error_message {
+	color :rgb(255, 148, 131);
+}
+
+#create_user_error_message {
+	color :rgb(255, 148, 131);
 }
 
 #create_user_body {
