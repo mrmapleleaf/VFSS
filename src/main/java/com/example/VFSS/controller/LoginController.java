@@ -1,5 +1,6 @@
 package com.example.VFSS.controller;
 
+import java.util.List;
 import java.util.Optional;
 
 import javax.servlet.http.HttpSession;
@@ -19,6 +20,7 @@ import com.example.VFSS.entity.User;
 import com.example.VFSS.form.UserForm;
 import com.example.VFSS.service.UserService;
 import com.example.VFSS.service.UserServiceImpl;
+import com.example.VFSS.service.Validators.UserValidator;
 
 @Controller
 @RequestMapping("/login")
@@ -43,20 +45,26 @@ public class LoginController {
 	public String login(@Valid @ModelAttribute UserForm userForm, BindingResult bindingResult, Model model,
 			RedirectAttributes redirectAttributes) {
 
-		if(!bindingResult.hasErrors()) {
-			Optional<User> OptionalLoginUser = userService.findUser(userForm.getUserId(), userForm.getPassword());
-			if(OptionalLoginUser != null) {
-				User loginUser = OptionalLoginUser.get();
-				redirectAttributes.addFlashAttribute("loginMessage", "ログインしました");
-				session.setAttribute("loginUser", loginUser);
-				return "redirect:/subscription/index";
-			} else {
-				model.addAttribute("errorMessage", "ユーザーIDかパスワードが間違っています");
-				return "login/login";
-			}
-		} else {
+		if(bindingResult.hasErrors()) {
 			model.addAttribute("userForm", userForm);
 			return "login/login";
 		}
+			
+		List<String> errorList = UserValidator.validate(userForm.getUserId(), userForm.getPassword());
+		if(errorList.size() != 0) {
+			model.addAttribute("errorList", errorList);
+			return "login/login";
+		}
+			
+		Optional<User> OptionalLoginUser = userService.findUser(userForm.getUserId(), userForm.getPassword());
+		if(OptionalLoginUser == null) {
+			model.addAttribute("errorMessage", "ユーザーIDかパスワードが間違っています");
+			return "login/login";
+		}
+		
+		User loginUser = OptionalLoginUser.get();
+		redirectAttributes.addFlashAttribute("loginMessage", "ログインしました");
+		session.setAttribute("loginUser", loginUser);
+		return "redirect:/subscription/index";
 	}
 }

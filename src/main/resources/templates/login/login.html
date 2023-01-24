@@ -17,6 +17,13 @@
 				<li id="login_error_message"><p th:text="${errorMessage}"></p></li>
 			</ul>
 		</div>
+				<div th:if = "!${#lists.isEmpty(errorList)}"> 
+			<div  th:if = "${#lists.size(errorList) != 0}"> 
+				 <ul th:each = "error : ${errorList}">
+					<li id="login_error_message" th:text = "${error}"></li>
+				</ul>	   
+			</div> 
+		</div>
 		<form method="POST" th:action="@{/login/login}" th:object="${userForm}">
 			<div id="login_userId">
 				<label>ユーザーID</label><br>

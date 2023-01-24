@@ -11,7 +11,7 @@
 <body>
 	<div th:replace="common/header::header"></div>
 	<div id="create_user_body">
-		<h1>新規ユーザー登録画面予定</h1>
+		<h1>新規ユーザー登録</h1>
 		<div th:if = "!${#lists.isEmpty(errorList)}"> 
 			<div  th:if = "${#lists.size(errorList) != 0}"> 
 				 <ul th:each = "error : ${errorList}">

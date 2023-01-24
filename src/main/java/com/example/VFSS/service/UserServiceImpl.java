@@ -34,9 +34,9 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public List<String> insert(User user) {
+	public List<String>  insert(User user) {
 		
-		List<String> errorList = UserValidator.validate(user);
+		List<String> errorList = UserValidator.validate(user.getUserId(), user.getPassword());
 		if(!(errorList.size() == 0)) {
 			return errorList;
 		}
@@ -45,9 +45,10 @@ public class UserServiceImpl implements UserService {
 			errorList.add("入力されたユーザーIDは既に使用されています");
 			return errorList;
 		}
-
+		
 		user.setPassword(CryptoHash.encryptoHash(user.getPassword()));
 		userDao.insert(user);
+		
 		return errorList;
 	}
 
