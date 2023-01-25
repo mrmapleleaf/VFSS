@@ -44,28 +44,27 @@ public class CreateUserController {
 	public String createUser(@Valid @ModelAttribute UserForm userForm, BindingResult bindingResult, Model model,
 			RedirectAttributes redirectAttributes) {
 		
-		if(!bindingResult.hasErrors()) {
-			User user = new User();
-			user.setUserId(userForm.getUserId());
-			user.setPassword(userForm.getPassword());
-			user.setCreatedAt(new Timestamp(System.currentTimeMillis()));
-			user.setUpdatedAt(new Timestamp(System.currentTimeMillis()));
-			user.setDeleteFlg(0);
-			
-			List<String> errorList = userService.insert(user);
-			
-			if(errorList.size() == 0) {
-				redirectAttributes.addFlashAttribute("loginMessage", "VFSSへようこそ！");
-				session.setAttribute("loginUser", user);
-				return "redirect:/subscription/index";
-			} else {
-				model.addAttribute("errorList", errorList);
-				return "user/createUser";
-			}
-			
-		} else {
+		if(bindingResult.hasErrors()) {
 			model.addAttribute("userForm", userForm);
+			return "user/createUser";	
+		}
+
+		User user = new User();
+		user.setUserId(userForm.getUserId());
+		user.setPassword(userForm.getPassword());
+		user.setCreatedAt(new Timestamp(System.currentTimeMillis()));
+		user.setUpdatedAt(new Timestamp(System.currentTimeMillis()));
+		user.setDeleteFlg(0);
+			
+		List<String> errorList = userService.insert(user);
+			
+		if(errorList.size() != 0) {
+			model.addAttribute("errorList", errorList);
 			return "user/createUser";
 		}
+		
+		redirectAttributes.addFlashAttribute("loginMessage", "VFSSへようこそ！");
+		session.setAttribute("loginUser", user);
+		return "redirect:/subscription/index";
 	}
 }

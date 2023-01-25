@@ -12,12 +12,7 @@
 	<div th:replace="common/header::header"></div>
 	<div id="login_body">
 		<h1>ログイン</h1>
-		<div th:if="${errorMessage != null}">
-			<ul>
-				<li id="login_error_message"><p th:text="${errorMessage}"></p></li>
-			</ul>
-		</div>
-				<div th:if = "!${#lists.isEmpty(errorList)}"> 
+		<div th:if = "!${#lists.isEmpty(errorList)}"> 
 			<div  th:if = "${#lists.size(errorList) != 0}"> 
 				 <ul th:each = "error : ${errorList}">
 					<li id="login_error_message" th:text = "${error}"></li>

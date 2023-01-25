@@ -58,7 +58,8 @@ public class LoginController {
 			
 		Optional<User> OptionalLoginUser = userService.findUser(userForm.getUserId(), userForm.getPassword());
 		if(OptionalLoginUser == null) {
-			model.addAttribute("errorMessage", "ユーザーIDかパスワードが間違っています");
+			errorList.add("ユーザーIDかパスワードが間違っています");
+			model.addAttribute("errorList", errorList);
 			return "login/login";
 		}
 		
