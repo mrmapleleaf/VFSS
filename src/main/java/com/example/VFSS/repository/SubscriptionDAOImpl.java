@@ -28,7 +28,10 @@ public class SubscriptionDAOImpl implements SubscriptionDAO {
 	@Override
 	public void insert(Subscription sub) {
 		// TODO 自動生成されたメソッド・スタブ
-
+		String sql = "insert into SUBSCRIPTIONS (usersId, subscriptionName, monthlyFee, createdAt, updatedAt)"
+				+ "values (?, ?, ?, ?, ?)";
+		jdbcTemplate.update(sql, sub.getUsersId(), sub.getSubscriptionName(), sub.getMonthlyFee(), sub.getCreatedAt(),
+				 sub.getUpdatedAt());
 	}
 
 	@Override

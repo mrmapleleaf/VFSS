@@ -30,8 +30,8 @@
 					<div id="error_message" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></div>
 				<input type="password" name="password" id="input_pass" th:value="*{password}">
 				<button id="btn_passview">表示</button><br>
-				<input id="login_user_buttom" type="submit" value="ログイン">
 			</div>
+			<input id="login_user_button" type="submit" value="ログイン">
 		</form>
 	</div>
 	<div th:replace="common/footer::footer"></div>

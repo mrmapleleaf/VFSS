@@ -14,7 +14,7 @@
 		<form method="POST">
 			<div id="register_service_name">
 				<label>サービス名</label><br>
-				<input type="text" name="serviceName">
+				<input type="text" name="serviceName" maxlength="100" size="30">
 			</div>
 			<div id="register_starting_date">
 				<label>利用開始日付</label><br>
@@ -22,7 +22,7 @@
 			</div>
 			<div id="register_monthly_fee">
 				<label>月額利用料</label><br>
-				<input type="text" name="monthlyFee">円
+				<input type="text" name="monthlyFee" maxlength="10">円
 			</div>
 			<input id="register_subscription_button" type="submit" value="登録">
 		</form>

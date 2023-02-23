@@ -5,45 +5,61 @@ import java.sql.Timestamp;
 public class User {
 
 	private int id;
+	
 	private String userId;
+	
 	private String password;
+	
 	private Timestamp createdAt;
+	
 	private Timestamp updatedAt;
+	
 	private int deleteFlg;
 	
 	public int getId() {
-		return id;
+		return this.id;
 	}
+	
 	public void setId(int id) {
 		this.id = id;
 	}
+	
 	public String getUserId() {
-		return userId;
+		return this.userId;
 	}
+	
 	public void setUserId(String userId) {
 		this.userId = userId;
 	}
+	
 	public String getPassword() {
-		return password;
+		return this.password;
 	}
+	
 	public void setPassword(String password) {
 		this.password = password;
 	}
+	
 	public Timestamp getCreatedAt() {
-		return createdAt;
+		return this.createdAt;
 	}
+	
 	public void setCreatedAt(Timestamp createdAt) {
 		this.createdAt = createdAt;
 	}
+	
 	public Timestamp getUpdatedAt() {
-		return updatedAt;
+		return this.updatedAt;
 	}
+	
 	public void setUpdatedAt(Timestamp updatedAt) {
 		this.updatedAt = updatedAt;
 	}
+	
 	public int getDeleteFlg() {
-		return deleteFlg;
+		return this.deleteFlg;
 	}
+	
 	public void setDeleteFlg(int deleteFlg) {
 		this.deleteFlg = deleteFlg;
 	}
