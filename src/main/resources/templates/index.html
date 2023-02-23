@@ -14,6 +14,22 @@
 			<h2>ユーザー情報</h2>
 			<p th:text="|ユーザーID：${session.loginUser.userId}|"></p>
 			<p th:text="|アカウント作成日付：${session.loginUser.createdAt}|"></p>
+			<table id="mySubscriptionsList">
+				<tr>
+					<th class="serviceName">サービス名</th>
+					<th class="startingDate">利用開始日</th>
+					<th class="usagePeriod">利用期間</th>
+					<th class="monthlyFee">月額料金</th>
+					<th class="total">累積利用金額</th>
+				</tr>
+				<tr>
+					<td class="seviceName"></td>
+					<td class="startingDate"></td>
+					<td class="usagePeriod"></td>
+					<td class="monthlyFee"></td>
+					<td class="total"></td>
+				</tr>
+			</table>
 		</div>
 	<div th:replace="common/footer::footer"></div>
 </body>

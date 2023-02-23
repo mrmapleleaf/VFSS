@@ -11,7 +11,8 @@
 		</nav>
 		<nav th:if="${session.loginUser != null}">
 			<ul class="header_ul">
-				<li class="header_item"><a class="header_button" href="#" th:href="@{/logout}">サブスク一覧</a></li>
+				<li class="header_item"><a class="header_button" href="#" th:href="@{/register}">サブスク登録</a></li>
+				<li class="header_item"><a class="header_button" href="#" th:href="@{/mysubscriptions/index}">サブスク一覧</a></li>
 				<li class="header_item"><a class="header_button" href="#" th:href="@{/logout}">ログアウト</a></li>
 			</ul>
 		</nav>

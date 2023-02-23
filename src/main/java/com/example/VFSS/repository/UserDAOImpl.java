@@ -25,10 +25,11 @@ public class UserDAOImpl implements UserDAO {
 
 	@Override
 	public Optional<User> findUser(String userId, String password) {
-		String sql = "select userId, createdAt, updatedAt, deleteFlg from USERS where userId = ? and password = ?";
+		String sql = "select id, userId, createdAt, updatedAt, deleteFlg from USERS where userId = ? and password = ?";
 		Map<String, Object> result = jdbctemplate.queryForMap(sql, userId, password);
 
 		User user = new User();
+		user.setId((int)result.get("id"));
 		user.setUserId((String)result.get("userId"));
 		user.setCreatedAt(Timestamp.valueOf((LocalDateTime)result.get("createdAt")));
 		user.setCreatedAt(Timestamp.valueOf((LocalDateTime)result.get("updatedAt")));

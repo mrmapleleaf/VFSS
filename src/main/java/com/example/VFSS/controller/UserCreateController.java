@@ -23,19 +23,19 @@ import com.example.VFSS.service.UserServiceImpl;
 
 @Controller
 @RequestMapping("/createUser")
-public class CreateUserController {
+public class UserCreateController {
 	
 	@Autowired
 	private final UserService userService;
 	@Autowired
 	HttpSession session;
 	
-	public CreateUserController(UserServiceImpl userServiceImpl) {
+	public UserCreateController(UserServiceImpl userServiceImpl) {
 		this.userService = userServiceImpl;
 	}
 	
 	@GetMapping("/form")
-	public String goToCreateUser(@ModelAttribute UserForm userForm, Model model) {
+	public String goToUserCreateForm(UserForm userForm, Model model) {
 			model.addAttribute(userForm);
 			return "user/createUser";
 	}

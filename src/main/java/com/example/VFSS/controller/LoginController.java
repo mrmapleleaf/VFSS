@@ -36,7 +36,7 @@ public class LoginController {
 	}
 
 	@GetMapping("/form")
-	public String goToLogin(@ModelAttribute UserForm userForm, Model model) {
+	public String goToLoginForm(@ModelAttribute UserForm userForm, Model model) {
 		model.addAttribute(userForm);
 		return "login/login";
 	}
@@ -66,6 +66,6 @@ public class LoginController {
 		User loginUser = OptionalLoginUser.get();
 		redirectAttributes.addFlashAttribute("loginMessage", "ログインしました");
 		session.setAttribute("loginUser", loginUser);
-		return "redirect:/subscription/index";
+		return "redirect:/mysubscriptions/index";
 	}
 }

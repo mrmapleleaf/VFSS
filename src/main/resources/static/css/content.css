@@ -3,6 +3,7 @@
 .content {
 	height : auto;
 	margin-left: 20px;
+	margin-right: 20px;
 	margin-bottom: 20px;
 }
 
@@ -39,7 +40,7 @@
 	margin-bottom: 15px;
 }
 
-#login_user_buttom {
+#login_user_button {
 	padding: 3px 25px 3px 25px;
 	margin-top: 10px;
 }
@@ -51,5 +52,47 @@
 
 #errorlist {
 	color:#FF3333;
+}
+
+table {
+	width: 100%;
+}
+
+table, th, td{
+	border-collapse: collapse;
+	border: 1px #080808 solid;
+}
+
+table#mySubscriptionsList .serviceName {
+	width: 30%;
+}
+
+table#mySubscriptionsList .startingDate {
+	width: 20%;
+}
+
+table#mySubscriptionsList th {
+	font-weight: bold;
+	padding: 20px;
+}
+
+#register_subscription_body {
+	margin-left: 20px;
+	margin-bottom: 20px;
+}
+
+#register_service_name {
+	margin-top: 15px;
+	margin-bottom: 15px;
+}
+
+#register_starting_date {
+	margin-top: 15px;
+	margin-bottom: 15px;
+}
+
+#register_subscription_button {
+	padding: 3px 25px 3px 25px;
+	margin-top: 10px;
 }
 

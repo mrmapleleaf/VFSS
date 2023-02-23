@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<link href="/css/header.css" th:href="@{/css/header.css}" rel="stylesheet">
+<link href="/css/footer.css" th:href="@{/css/footer.css}" rel="stylesheet">
+<link href="/css/content.css" th:href="@{/css/content.css}" rel="stylesheet">
+<meta charset="UTF-8">
+<title>サブスク登録画面</title>
+</head>
+<body>
+	<div th:replace="common/header::header"></div>
+	<div id="register_subscription_body">
+		<h1>サブスク登録</h1>
+		<form method="POST">
+			<div id="register_service_name">
+				<label>サービス名</label><br>
+				<input type="text" name="serviceName">
+			</div>
+			<div id="register_starting_date">
+				<label>利用開始日付</label><br>
+				<input type="date" name="startingDate">
+			</div>
+			<div id="register_monthly_fee">
+				<label>月額利用料</label><br>
+				<input type="text" name="monthlyFee">円
+			</div>
+			<input id="register_subscription_button" type="submit" value="登録">
+		</form>
+	</div>
+	<div th:replace="common/footer::footer"></div>
+</body>
+</html>
