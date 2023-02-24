@@ -42,8 +42,8 @@ public class UserDAOImpl implements UserDAO {
 
 	@Override
 	public void insert(User user) {
-		String sql = "insert  into USERS (userId, password, createdAt, updatedAt, deleteFlg) values (?, ?, ?, ?, ?)";
-		jdbctemplate.update(sql, user.getUserId(), user.getPassword(), user.getCreatedAt(), user.getUpdatedAt(), user.getDeleteFlg());
+		String sql = "insert  into USERS (userId, password, createdAt, updatedAt) values (?, ?, ?, ?)";
+		jdbctemplate.update(sql, user.getUserId(), user.getPassword(), user.getCreatedAt(), user.getUpdatedAt());
 	}
 
 	@Override

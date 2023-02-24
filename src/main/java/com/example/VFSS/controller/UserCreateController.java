@@ -54,7 +54,6 @@ public class UserCreateController {
 		user.setPassword(userForm.getPassword());
 		user.setCreatedAt(new Timestamp(System.currentTimeMillis()));
 		user.setUpdatedAt(new Timestamp(System.currentTimeMillis()));
-		user.setDeleteFlg(0);
 			
 		List<String> errorList = userService.insert(user);
 			
