@@ -96,3 +96,6 @@ table#mySubscriptionsList th {
 	margin-top: 10px;
 }
 
+#register_subscription_error_message {
+		color :rgb(255, 148, 131);
+}

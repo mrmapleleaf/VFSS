@@ -1,17 +1,20 @@
 package com.example.VFSS.entity;
 
 import java.sql.Timestamp;
+import java.time.LocalDate;
 
 public class Subscription {
 	
 	private int id;
 	
-	private String usersId;
+	private int usersId;
 	
 	private String subscriptionName;
 	
 	private int monthlyFee;
 	
+	private LocalDate startingDate;
+
 	private Timestamp createdAt;
 	
 	private Timestamp updatedAt;
@@ -26,11 +29,11 @@ public class Subscription {
 		this.id = id;
 	}
 
-	public String getUsersId() {
+	public int getUsersId() {
 		return this.usersId;
 	}
 
-	public void setUsersId(String usersId) {
+	public void setUsersId(int usersId) {
 		this.usersId = usersId;
 	}
 
@@ -48,6 +51,14 @@ public class Subscription {
 
 	public void setMonthlyFee(int monthlyFee) {
 		this.monthlyFee = monthlyFee;
+	}
+	
+	public LocalDate getStartingDate() {
+		return this.startingDate;
+	}
+
+	public void setStartingDate(LocalDate startingDate) {
+		this.startingDate = startingDate;
 	}
 
 	public Timestamp getCreatedAt() {

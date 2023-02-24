@@ -11,7 +11,7 @@ public interface SubscriptionService {
 	
 	Optional<List<Subscription>> findAllSubscriptions(int id);
 	
-	void insert(Subscription sub);
+	List<String> insert(Subscription sub);
 	
 	int update(Subscription sub);
 	

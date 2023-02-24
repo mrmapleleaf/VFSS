@@ -1,19 +1,23 @@
-package com.example.VFSS.repository;
+package com.example.VFSS.service;
 
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
 
 import com.example.VFSS.entity.Subscription;
+import com.example.VFSS.repository.SubscriptionDAO;
 
-@Repository
-public class SubscriptionDAOImpl implements SubscriptionDAO {
+@Service
+public class SubscriptionServiceImpl implements SubscriptionService {
 	
 	@Autowired
-	private JdbcTemplate jdbcTemplate;
+	private final SubscriptionDAO subscriptionDao;
+	
+	public SubscriptionServiceImpl(SubscriptionDAO subscriptionDao) {
+		this.subscriptionDao = subscriptionDao;
+	}
 
 	@Override
 	public Optional<Subscription> findSubscription(int id) {
@@ -23,17 +27,14 @@ public class SubscriptionDAOImpl implements SubscriptionDAO {
 
 	@Override
 	public Optional<List<Subscription>> findAllSubscriptions(int id) {
-		
+		// TODO 自動生成されたメソッド・スタブ
 		return Optional.empty();
 	}
 
 	@Override
-	public void insert(Subscription sub) {
-		// TODO 自動生成されたメソッド・スタブ
-		String sql = "insert into SUBSCRIPTIONS (usersId, subscriptionName, monthlyFee, createdAt, updatedAt)"
-				+ "values (?, ?, ?, ?, ?)";
-		jdbcTemplate.update(sql, sub.getUsersId(), sub.getSubscriptionName(), sub.getMonthlyFee(), sub.getCreatedAt(),
-				 sub.getUpdatedAt());
+	public List<String> insert(Subscription sub) {
+
+		return null;
 	}
 
 	@Override
