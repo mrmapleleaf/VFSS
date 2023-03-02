@@ -21,7 +21,6 @@ import com.example.VFSS.entity.Subscription;
 import com.example.VFSS.entity.User;
 import com.example.VFSS.form.SubscriptionForm;
 import com.example.VFSS.service.SubscriptionService;
-import com.example.VFSS.service.SubscriptionServiceImpl;
 import com.example.VFSS.service.Validators.SubscriptionValidator;
 
 @Controller
@@ -33,8 +32,8 @@ public class SubscriptionCreateController {
 	@Autowired
 	HttpSession session;
 	
-	public SubscriptionCreateController(SubscriptionServiceImpl subscriptionServiceImpl) {
-		this.subscriptionService = subscriptionServiceImpl;
+	public SubscriptionCreateController(SubscriptionService subscriptionService) {
+		this.subscriptionService = subscriptionService;
 	}
 
 	@GetMapping
@@ -63,9 +62,12 @@ public class SubscriptionCreateController {
 		Subscription subscription = new Subscription();
 		subscription.setSubscriptionName(subscriptionForm.getServiceName());
 		subscription.setStartingDate(LocalDate.parse(subscriptionForm.getStartingDate()));
+		subscription.setMonthlyFee(subscription.getMonthlyFee());
 		subscription.setUsersId(loginUser.getId());
 		subscription.setCreatedAt(new Timestamp(System.currentTimeMillis()));
 		subscription.setUpdatedAt(new Timestamp(System.currentTimeMillis()));
+		
+		subscriptionService.insert(subscription);
 		
 		redirectAttrubutes.addFlashAttribute("registerCompletedMessage", "サービス登録完了");
 		return "redirect:/mysubscriptions/index";

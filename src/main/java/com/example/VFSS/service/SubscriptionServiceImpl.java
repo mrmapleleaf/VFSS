@@ -26,15 +26,13 @@ public class SubscriptionServiceImpl implements SubscriptionService {
 	}
 
 	@Override
-	public Optional<List<Subscription>> findAllSubscriptions(int id) {
-		// TODO 自動生成されたメソッド・スタブ
-		return Optional.empty();
+	public List<Subscription> findAllSubscriptions(int id) {
+		return subscriptionDao.findAllSubscriptions(id);
 	}
 
 	@Override
-	public List<String> insert(Subscription sub) {
-
-		return null;
+	public void insert(Subscription sub) {
+		subscriptionDao.insert(sub);
 	}
 
 	@Override

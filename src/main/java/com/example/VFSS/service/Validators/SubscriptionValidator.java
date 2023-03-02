@@ -35,7 +35,7 @@ public class SubscriptionValidator {
 	}
 	
 	public static String validateCharacterOfMonthlyFee(String monthlyFee) {
-		if(!monthlyFee.matches("[0-9]+")) {
+		if(!monthlyFee.matches("^[0-9]+$")) {
 			return "月額利用料には半角数字のみを使用してください";
 		}
 		return "";

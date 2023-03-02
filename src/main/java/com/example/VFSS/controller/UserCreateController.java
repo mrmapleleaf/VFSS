@@ -19,7 +19,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.example.VFSS.entity.User;
 import com.example.VFSS.form.UserForm;
 import com.example.VFSS.service.UserService;
-import com.example.VFSS.service.UserServiceImpl;
 
 @Controller
 @RequestMapping("/createUser")
@@ -30,8 +29,8 @@ public class UserCreateController {
 	@Autowired
 	HttpSession session;
 	
-	public UserCreateController(UserServiceImpl userServiceImpl) {
-		this.userService = userServiceImpl;
+	public UserCreateController(UserService userService) {
+		this.userService = userService;
 	}
 	
 	@GetMapping("/form")

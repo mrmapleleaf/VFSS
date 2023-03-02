@@ -9,9 +9,9 @@ public interface SubscriptionService {
 
 	Optional<Subscription> findSubscription(int id);
 	
-	Optional<List<Subscription>> findAllSubscriptions(int id);
+	List<Subscription> findAllSubscriptions(int id);
 	
-	List<String> insert(Subscription sub);
+	void  insert(Subscription sub);
 	
 	int update(Subscription sub);
 	

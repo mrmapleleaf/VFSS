@@ -9,7 +9,7 @@ public interface SubscriptionDAO {
 
 	Optional<Subscription> findSubscription(int id);
 	
-	Optional<List<Subscription>> findAllSubscriptions(int id);
+	List<Subscription> findAllSubscriptions(int id);
 	
 	void insert(Subscription sub);
 	

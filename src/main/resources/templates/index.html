@@ -11,10 +11,11 @@
 	<div th:replace="common/header::header"></div>
 		<div class="content">
 			<h1 th:if="${loginMessage != null}" th:text="${loginMessage}"></h1>
+			<h1 th:if="${registerCompletedMessage != null}" th:text="${registerCompletedMessage}"></h1>
 			<h2>ユーザー情報</h2>
 			<p th:text="|ユーザーID：${session.loginUser.userId}|"></p>
 			<p th:text="|アカウント作成日付：${session.loginUser.createdAt}|"></p>
-			<table id="mySubscriptionsList">
+			<table id="mySubscriptionsList" >
 				<tr>
 					<th class="serviceName">サービス名</th>
 					<th class="startingDate">利用開始日</th>
@@ -22,11 +23,11 @@
 					<th class="monthlyFee">月額料金</th>
 					<th class="total">累積利用金額</th>
 				</tr>
-				<tr>
-					<td class="seviceName"></td>
-					<td class="startingDate"></td>
+				<tr th:each="subscription : ${subscriptionList}">
+					<td class="seviceName" th:text="${subscription.serviceName}"></td>
+					<td class="startingDate" th:text="${subscription.startingDate}"></td>
 					<td class="usagePeriod"></td>
-					<td class="monthlyFee"></td>
+					<td class="monthlyFee" th:text="subscription.monthlyFee"></td>
 					<td class="total"></td>
 				</tr>
 			</table>

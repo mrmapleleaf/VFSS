@@ -19,7 +19,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.example.VFSS.entity.User;
 import com.example.VFSS.form.UserForm;
 import com.example.VFSS.service.UserService;
-import com.example.VFSS.service.UserServiceImpl;
 import com.example.VFSS.service.Validators.UserValidator;
 
 @Controller
@@ -31,8 +30,8 @@ public class LoginController {
 	@Autowired
 	private HttpSession session;
 	
-	public LoginController(UserServiceImpl userServiceImpl) {
-		this.userService = userServiceImpl;
+	public LoginController(UserService userService) {
+		this.userService = userService;
 	}
 
 	@GetMapping("/form")

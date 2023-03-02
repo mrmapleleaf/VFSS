@@ -22,14 +22,14 @@ public class UserValidator {
 	}
 	
 	public static String validateCharacterOfUserID(String userId) {
-		if(!userId.matches("[a-z0-9]+")) {
+		if(!userId.matches("^[a-z0-9]+$")) {
 			return "ユーザーIDには半角小文字の英数字のみを使用してください";
 		}
 		return "";
 	}
 	
 	public static String validateCharacterOfPassword(String password) {
-		if(!password.matches("[A-Za-z0-9]+")) {
+		if(!password.matches("^[A-Za-z0-9]+$")) {
 			return "パスワードには半角大文字、小文字の英字、半角数字のみを使用してください";
 		}
 		return "";
