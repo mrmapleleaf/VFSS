@@ -1,5 +1,6 @@
 package com.example.VFSS.service;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 
@@ -9,7 +10,9 @@ public interface SubscriptionService {
 
 	Optional<Subscription> findSubscription(int id);
 	
-	List<Subscription> findAllSubscriptions(int id);
+	List<Subscription> findAllSubscriptions(int id, HashMap<String, String> search);
+	
+	int allSubscriptionsCount(int id);
 	
 	void  insert(Subscription sub);
 	

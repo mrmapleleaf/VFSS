@@ -1,9 +1,12 @@
 package com.example.VFSS.entity;
 
+import java.io.Serializable;
 import java.sql.Timestamp;
 import java.time.LocalDate;
 
-public class Subscription {
+public class Subscription implements Serializable {
+	
+	private static final long serialVersionUID = -870708489937857961L;
 	
 	private int id;
 	

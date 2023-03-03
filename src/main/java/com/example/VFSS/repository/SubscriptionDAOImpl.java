@@ -6,6 +6,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -29,11 +30,13 @@ public class SubscriptionDAOImpl implements SubscriptionDAO {
 	}
 
 	@Override
-	public List<Subscription> findAllSubscriptions(int id) {
+	public List<Subscription> findAllSubscriptions(int id, HashMap<String, String> search) {
 		String sql = "select id, usersId, subscriptionName, monthlyFee, startingDate, createdAt, updatedAt, deleteFlg "
-				+ "from SUBSCRIPTIONS where usersId = ?";
+				+ "from SUBSCRIPTIONS where usersId = ? limit ? offset ?";
+		int limit = Integer.parseInt(search.get("limit"));
+		int page = Integer.parseInt(search.get("page")) - 1;
 		
-		List<Map<String, Object>> resultList= jdbcTemplate.queryForList(sql, id);
+		List<Map<String, Object>> resultList= jdbcTemplate.queryForList(sql, id,  limit, page * limit);
 		List<Subscription> subscriptionList = new ArrayList<>();
 		
 		for(Map<String, Object> list : resultList ) {
@@ -46,7 +49,7 @@ public class SubscriptionDAOImpl implements SubscriptionDAO {
 			sub.setCreatedAt(Timestamp.valueOf((LocalDateTime)list.get("createdAt")));
 			sub.setUpdatedAt(Timestamp.valueOf((LocalDateTime)list.get("updatedAt")));
 			sub.setDeleteFlg((int)list.get("deleteFlg"));
-			sub.setUsagePeriod(ChronoUnit.MONTHS.between(sub.getStartingDate(), LocalDate.now()) + 1);
+			sub.setUsagePeriod(ChronoUnit.MONTHS.between(sub.getStartingDate(), LocalDate.now()));
 			subscriptionList.add(sub);
 		}
 		return subscriptionList;
@@ -70,6 +73,13 @@ public class SubscriptionDAOImpl implements SubscriptionDAO {
 	public int delete(int id) {
 		// TODO 自動生成されたメソッド・スタブ
 		return 0;
+	}
+
+	@Override
+	public int allSubscriptionsCount(int id) {
+		String sql ="select count(1) as allSubscriptionsCount from SUBSCRIPTIONS where usersId = ?";
+		Map<String, Object> result =  jdbcTemplate.queryForMap(sql, id);
+		return  ((Number) result.get("allSubscriptionsCount")).intValue();
 	}
 
 }

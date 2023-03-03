@@ -1,5 +1,6 @@
 package com.example.VFSS.service;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 
@@ -26,8 +27,8 @@ public class SubscriptionServiceImpl implements SubscriptionService {
 	}
 
 	@Override
-	public List<Subscription> findAllSubscriptions(int id) {
-		return subscriptionDao.findAllSubscriptions(id);
+	public List<Subscription> findAllSubscriptions(int id, HashMap<String, String> search) {
+		return subscriptionDao.findAllSubscriptions(id, search);
 	}
 
 	@Override
@@ -45,6 +46,11 @@ public class SubscriptionServiceImpl implements SubscriptionService {
 	public int delete(int id) {
 		// TODO 自動生成されたメソッド・スタブ
 		return 0;
+	}
+
+	@Override
+	public int allSubscriptionsCount(int id) {
+		return subscriptionDao.allSubscriptionsCount(id);
 	}
 
 }
