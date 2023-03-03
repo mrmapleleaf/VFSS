@@ -9,7 +9,7 @@ public class Subscription {
 	
 	private int usersId;
 	
-	private String subscriptionName;
+	private String serviceName;
 	
 	private int monthlyFee;
 	
@@ -20,6 +20,8 @@ public class Subscription {
 	private Timestamp updatedAt;
 	
 	private int deleteFlg;
+	
+	private long usagePeriod;
 
 	public int getId() {
 		return this.id;
@@ -37,12 +39,13 @@ public class Subscription {
 		this.usersId = usersId;
 	}
 
-	public String getSubscriptionName() {
-		return this.subscriptionName;
+
+	public String getServiceName() {
+		return this.serviceName;
 	}
 
-	public void setSubscriptionName(String subscriptionName) {
-		this.subscriptionName = subscriptionName;
+	public void setServiceName(String serviceName) {
+		this.serviceName = serviceName;
 	}
 
 	public int getMonthlyFee() {
@@ -83,5 +86,13 @@ public class Subscription {
 
 	public void setDeleteFlg(int deleteFlg) {
 		this.deleteFlg = deleteFlg;
+	}
+
+	public long getUsagePeriod() {
+		return this.usagePeriod;
+	}
+
+	public void setUsagePeriod(long usagePeriod) {
+		this.usagePeriod = usagePeriod;
 	}
 }

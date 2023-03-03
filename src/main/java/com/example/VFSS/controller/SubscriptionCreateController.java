@@ -60,9 +60,9 @@ public class SubscriptionCreateController {
 		User loginUser = (User)session.getAttribute("loginUser");
 		
 		Subscription subscription = new Subscription();
-		subscription.setSubscriptionName(subscriptionForm.getServiceName());
+		subscription.setServiceName(subscriptionForm.getServiceName());
 		subscription.setStartingDate(LocalDate.parse(subscriptionForm.getStartingDate()));
-		subscription.setMonthlyFee(subscription.getMonthlyFee());
+		subscription.setMonthlyFee(Integer.parseInt(subscriptionForm.getMonthlyFee()));
 		subscription.setUsersId(loginUser.getId());
 		subscription.setCreatedAt(new Timestamp(System.currentTimeMillis()));
 		subscription.setUpdatedAt(new Timestamp(System.currentTimeMillis()));

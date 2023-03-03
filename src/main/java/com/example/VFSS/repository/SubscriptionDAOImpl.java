@@ -1,7 +1,10 @@
 package com.example.VFSS.repository;
 
+import java.sql.Date;
 import java.sql.Timestamp;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -37,12 +40,13 @@ public class SubscriptionDAOImpl implements SubscriptionDAO {
 			Subscription sub = new Subscription();
 			sub.setId((int)list.get("id"));
 			sub.setId((int)list.get("usersId"));
-			sub.setSubscriptionName((String)list.get("subscriptionName"));
-			sub.setMonthlyFee((int)list.get("mouthlyFee"));
-			sub.setStartingDate((LocalDate)list.get("startingDate"));
-			sub.setCreatedAt((Timestamp)list.get("createdAt"));
-			sub.setUpdatedAt((Timestamp)list.get("updatedAt"));
+			sub.setServiceName((String)list.get("subscriptionName"));
+			sub.setMonthlyFee((int)list.get("monthlyFee"));
+			sub.setStartingDate(((Date)list.get("startingDate")).toLocalDate());
+			sub.setCreatedAt(Timestamp.valueOf((LocalDateTime)list.get("createdAt")));
+			sub.setUpdatedAt(Timestamp.valueOf((LocalDateTime)list.get("updatedAt")));
 			sub.setDeleteFlg((int)list.get("deleteFlg"));
+			sub.setUsagePeriod(ChronoUnit.MONTHS.between(sub.getStartingDate(), LocalDate.now()) + 1);
 			subscriptionList.add(sub);
 		}
 		return subscriptionList;
@@ -50,10 +54,9 @@ public class SubscriptionDAOImpl implements SubscriptionDAO {
 
 	@Override
 	public void insert(Subscription sub) {
-		// TODO 自動生成されたメソッド・スタブ
 		String sql = "insert into SUBSCRIPTIONS (usersId, subscriptionName, monthlyFee, startingDate, createdAt, updatedAt) "
 				+ "values (?, ?, ?, ?, ?, ?)";
-		jdbcTemplate.update(sql, sub.getUsersId(), sub.getSubscriptionName(), sub.getMonthlyFee(), sub.getStartingDate(), sub.getCreatedAt(),
+		jdbcTemplate.update(sql, sub.getUsersId(), sub.getServiceName(), sub.getMonthlyFee(), sub.getStartingDate(), sub.getCreatedAt(),
 				 sub.getUpdatedAt());
 	}
 

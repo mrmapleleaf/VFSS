@@ -18,17 +18,17 @@
 			<table id="mySubscriptionsList" >
 				<tr>
 					<th class="serviceName">サービス名</th>
-					<th class="startingDate">利用開始日</th>
+					<th class="startingDate">利用開始日付</th>
 					<th class="usagePeriod">利用期間</th>
 					<th class="monthlyFee">月額料金</th>
 					<th class="total">累積利用金額</th>
 				</tr>
-				<tr th:each="subscription : ${subscriptionList}">
-					<td class="seviceName" th:text="${subscription.serviceName}"></td>
-					<td class="startingDate" th:text="${subscription.startingDate}"></td>
-					<td class="usagePeriod"></td>
-					<td class="monthlyFee" th:text="subscription.monthlyFee"></td>
-					<td class="total"></td>
+				<tr th:inline="text" th:each="subscription : ${subscriptionList}">
+					<td class="subscriptionName">[[${subscription.serviceName}]]</td>
+					<td class="startingDate">[[${subscription.startingDate}]]</td>
+					<td class="usagePeriod">[[${subscription.usagePeriod}]]ヶ月</td>
+					<td class="monthlyFee">[[${subscription.monthlyFee}]]円</td>
+					<td class="total">[[${subscription.monthlyFee} * ${subscription.usagePeriod}]]円</td>
 				</tr>
 			</table>
 		</div>
