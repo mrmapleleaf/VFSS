@@ -38,7 +38,7 @@ public class SubscriptionDAOImpl implements SubscriptionDAO {
 	@Override
 	public List<Subscription> findAllSubscriptions(int id, HashMap<String, String> search) {
 		String sql = "select id, usersId, serviceName, monthlyFee, startingDate, createdAt, updatedAt, deleteFlg "
-				+ "from SUBSCRIPTIONS where usersId = ? limit ? offset ?";
+				+ "from SUBSCRIPTIONS where usersId = ? and deleteFlg = 0 limit ? offset ?";
 		int limit = Integer.parseInt(search.get("limit"));
 		int page = Integer.parseInt(search.get("page")) - 1;
 		
@@ -74,7 +74,7 @@ public class SubscriptionDAOImpl implements SubscriptionDAO {
 
 	@Override
 	public int allSubscriptionsCount(int id) {
-		String sql ="select count(1) as allSubscriptionsCount from SUBSCRIPTIONS where usersId = ?";
+		String sql ="select count(1) as allSubscriptionsCount from SUBSCRIPTIONS where usersId = ? and deleteFlg = 0";
 		Map<String, Object> result =  jdbcTemplate.queryForMap(sql, id);
 		return  ((Number) result.get("allSubscriptionsCount")).intValue();
 	}
