@@ -63,6 +63,6 @@ public class UserCreateController {
 		
 		redirectAttributes.addFlashAttribute("loginMessage", "VFSSへようこそ！");
 		session.setAttribute("loginUser", user);
-		return "redirect:/subscription/index";
+		return "redirect:/mysubscriptions/index";
 	}
 }

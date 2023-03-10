@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<link href="/css/header.css" th:href="@{/css/header.css}" rel="stylesheet">
+<link href="/css/footer.css" th:href="@{/css/footer.css}" rel="stylesheet">
+<link href="/css/content.css" th:href="@{/css/content.css}" rel="stylesheet">
+<head>
+<meta charset="UTF-8">
+<title>Page Not Found</title>
+</head>
+<body>
+	<div th:replace="common/header::header"></div>
+	<div class="content">
+		<h1>ページは見つかりませんでした。</h1>
+		<p>お探しのページは移動または削除された可能性があります。</p>
+		<a class="goToToppage" href="#" th:href="@{/toppage}">トップページへ</a>
+	</div>
+	<div th:replace="common/footer::footer"></div>
+</body>
+</html>

@@ -10,64 +10,68 @@
 <link href="/css/header.css" th:href="@{/css/header.css}" rel="stylesheet">
 <link href="/css/footer.css" th:href="@{/css/footer.css}" rel="stylesheet">
 <link href="/css/content.css" th:href="@{/css/content.css}" rel="stylesheet">
-
-
 <meta charset="UTF-8">
 <title>サブスク一覧</title>
 </head>
 <body>
 	<div th:replace="common/header::header"></div>
-		<div class="content">
+		<div class="content" th:if="!${#lists.isEmpty(subscriptionList)}">
 			<h1 th:if="${loginMessage != null}" th:text="${loginMessage}"></h1>
+			<h1 th:if="${errorMessage != null}" th:text="${errorMessage}"></h1>
 			<h1 th:if="${registerCompletedMessage != null}" th:text="${registerCompletedMessage}"></h1>
-			<h2>ユーザー情報</h2>
+			<h2>使用サブスク一覧</h2>
 			<p th:text="|ユーザーID：${session.loginUser.userId}|"></p>
 			<p th:text="|アカウント作成日付：${session.loginUser.createdAt}|"></p>
 			<table id="mySubscriptionsList" >
 				<tr>
-					<th class="serviceName">サービス名</th>
+					<th class="serviceName">サブスク名</th>
 					<th class="startingDate">利用開始日付</th>
 					<th class="usagePeriod">利用期間</th>
 					<th class="monthlyFee">月額料金</th>
 					<th class="total">累積利用金額</th>
 				</tr>
 				<tr th:inline="text" th:each="subscription : ${subscriptionList}">
-					<td class="subscriptionName">[[${subscription.serviceName}]]</td>
+					<td class="subscriptionName"><a href="#" th:href="@{/show/{id}(id=${subscription.id})}">[[${subscription.serviceName}]]</a></td>
 					<td class="startingDate">[[${subscription.startingDate}]]</td>
 					<td class="usagePeriod">[[${subscription.usagePeriod}]]ヶ月</td>
 					<td class="monthlyFee">[[${subscription.monthlyFee}]]円</td>
 					<td class="total">[[${subscription.monthlyFee} * ${subscription.usagePeriod}]]円</td>
 				</tr>
 			</table>
+			<nav>
+			    <ul class="pagination pg-blue justify-content-center">
+			        <li th:if="${startPage} > 1" class="page-item ">
+			            <a class="page-link" th:href="@{'/mysubscriptions/index?page=1'}" tabindex="-2">最初</a>
+			        </li>
+			        <li th:if="${page} > 1" class="page-item ">
+			            <a class="page-link" th:href="@{'/mysubscriptions/index?page=' + ${page-1}}" tabindex="-1">前へ</a>
+			        </li>
+			        <th:block th:if="${endPage}<=0">
+			            <li class="page-item " th:classappend="${i == page} ? active" th:each="i : ${startPage}">
+			                <a class="page-link" th:href="@{'/mysubscriptions/index?page=' + ${i}}" th:text="${i}"></a>
+			            </li>
+			        </th:block>
+			        <!-- StartPageからEndPageまでのページ数を表示する -->
+			        <th:block th:if="${endPage}>0">
+			            <li class="page-item " th:classappend="${i == page} ? active" th:each="i : ${#numbers.sequence(startPage, endPage)}">
+			                <a class="page-link" th:href="@{'/mysubscriptions/index?page=' + ${i}}" th:text="${i}"></a>
+			            </li>
+			        </th:block>
+			        <li th:if="${page} < ${totalPage}" class="page-item ">
+			            <a class="page-link" th:href="@{'/mysubscriptions/index?page=' + ${page+1}}">次へ</a>
+			        </li>
+			        <li th:if="${endPage} < ${totalPage}" class="page-item ">
+			            <a class="page-link" th:href="@{'/mysubscriptions/index?page=' + ${totalPage}}">最後</a>
+			        </li>
+			    </ul>
+			</nav>
 		</div>
-<nav>
-    <ul class="pagination pg-blue justify-content-center">
-        <li th:if="${startPage} > 1" class="page-item ">
-            <a class="page-link" th:href="@{'/mysubscriptions/index?page=1'}" tabindex="-2">最初</a>
-        </li>
-        <li th:if="${page} > 1" class="page-item ">
-            <a class="page-link" th:href="@{'/mysubscriptions/index?page=' + ${page-1}}" tabindex="-1">前へ</a>
-        </li>
-        <th:block th:if="${endPage}<=0">
-            <li class="page-item " th:classappend="${i == page} ? active" th:each="i : ${startPage}">
-                <a class="page-link" th:href="@{'/mysubscriptions/index?page=' + ${i}}" th:text="${i}"></a>
-            </li>
-        </th:block>
-        <!-- StartPageからEndPageまでのページ数を表示する -->
-        <th:block th:if="${endPage}>0">
-            <li class="page-item " th:classappend="${i == page} ? active" th:each="i : ${#numbers.sequence(startPage, endPage)}">
-                <a class="page-link" th:href="@{'/mysubscriptions/index?page=' + ${i}}" th:text="${i}"></a>
-            </li>
-        </th:block>
-        <li th:if="${page} < ${totalPage}" class="page-item ">
-            <a class="page-link" th:href="@{'/mysubscriptions/index?page=' + ${page+1}}">次へ</a>
-        </li>
-        <li th:if="${endPage} < ${totalPage}" class="page-item ">
-            <a class="page-link" th:href="@{'/mysubscriptions/index?page=' + ${totalPage}}">最後</a>
-        </li>
-    </ul>
-</nav>
-
-<div th:replace="common/footer::footer"></div>
+		<div class="content" th:if="${#lists.isEmpty(subscriptionList)}">
+			<h1 th:if="${loginMessage != null}" th:text="${loginMessage}"></h1>
+			<h1 th:if="${errorMessage != null}" th:text="${errorMessage}"></h1>
+			<h2>使用サブスク一覧</h2>
+			<p>サブスクサービスが未登録です。自分が使っているサービスを登録してみよう！</p>
+		</div>
+	<div th:replace="common/footer::footer"></div>
 </body>
 </html>

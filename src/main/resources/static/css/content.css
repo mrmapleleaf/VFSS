@@ -97,5 +97,9 @@ table#mySubscriptionsList th {
 }
 
 #register_subscription_error_message {
-		color :rgb(255, 148, 131);
+	color :rgb(255, 148, 131);
+}
+
+.pagination {
+	margin-top: 20px;
 }

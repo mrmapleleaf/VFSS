@@ -25,13 +25,19 @@ public class SubscriptionDAOImpl implements SubscriptionDAO {
 
 	@Override
 	public Optional<Subscription> findSubscription(int id) {
+		String sql = "select id, usersId, serviceName, monthlyFee, startingDate, createdAt, updatedAt, deleteFlg "
+				+ "from SUBSCRIPTIONS where id = ?";
 		
-		return Optional.empty();
+		Map<String, Object> subObj = jdbcTemplate.queryForMap(sql, id);
+		Subscription sub = subscriptionFactory(subObj);
+		Optional<Subscription> subOpt = Optional.ofNullable(sub);
+		
+		return subOpt;
 	}
 
 	@Override
 	public List<Subscription> findAllSubscriptions(int id, HashMap<String, String> search) {
-		String sql = "select id, usersId, subscriptionName, monthlyFee, startingDate, createdAt, updatedAt, deleteFlg "
+		String sql = "select id, usersId, serviceName, monthlyFee, startingDate, createdAt, updatedAt, deleteFlg "
 				+ "from SUBSCRIPTIONS where usersId = ? limit ? offset ?";
 		int limit = Integer.parseInt(search.get("limit"));
 		int page = Integer.parseInt(search.get("page")) - 1;
@@ -39,17 +45,8 @@ public class SubscriptionDAOImpl implements SubscriptionDAO {
 		List<Map<String, Object>> resultList= jdbcTemplate.queryForList(sql, id,  limit, page * limit);
 		List<Subscription> subscriptionList = new ArrayList<>();
 		
-		for(Map<String, Object> list : resultList ) {
-			Subscription sub = new Subscription();
-			sub.setId((int)list.get("id"));
-			sub.setId((int)list.get("usersId"));
-			sub.setServiceName((String)list.get("subscriptionName"));
-			sub.setMonthlyFee((int)list.get("monthlyFee"));
-			sub.setStartingDate(((Date)list.get("startingDate")).toLocalDate());
-			sub.setCreatedAt(Timestamp.valueOf((LocalDateTime)list.get("createdAt")));
-			sub.setUpdatedAt(Timestamp.valueOf((LocalDateTime)list.get("updatedAt")));
-			sub.setDeleteFlg((int)list.get("deleteFlg"));
-			sub.setUsagePeriod(ChronoUnit.MONTHS.between(sub.getStartingDate(), LocalDate.now()));
+		for(Map<String, Object> subObj : resultList ) {
+			Subscription sub = subscriptionFactory(subObj);
 			subscriptionList.add(sub);
 		}
 		return subscriptionList;
@@ -57,7 +54,7 @@ public class SubscriptionDAOImpl implements SubscriptionDAO {
 
 	@Override
 	public void insert(Subscription sub) {
-		String sql = "insert into SUBSCRIPTIONS (usersId, subscriptionName, monthlyFee, startingDate, createdAt, updatedAt) "
+		String sql = "insert into SUBSCRIPTIONS (usersId, serviceName, monthlyFee, startingDate, createdAt, updatedAt) "
 				+ "values (?, ?, ?, ?, ?, ?)";
 		jdbcTemplate.update(sql, sub.getUsersId(), sub.getServiceName(), sub.getMonthlyFee(), sub.getStartingDate(), sub.getCreatedAt(),
 				 sub.getUpdatedAt());
@@ -80,6 +77,20 @@ public class SubscriptionDAOImpl implements SubscriptionDAO {
 		String sql ="select count(1) as allSubscriptionsCount from SUBSCRIPTIONS where usersId = ?";
 		Map<String, Object> result =  jdbcTemplate.queryForMap(sql, id);
 		return  ((Number) result.get("allSubscriptionsCount")).intValue();
+	}
+	
+	private Subscription subscriptionFactory(Map<String, Object> obj) {
+		Subscription sub = new Subscription();
+		sub.setId((int)obj.get("id"));
+		sub.setUsersId((int)obj.get("usersId"));
+		sub.setServiceName((String)obj.get("serviceName"));
+		sub.setMonthlyFee((int)obj.get("monthlyFee"));
+		sub.setStartingDate(((Date)obj.get("startingDate")).toLocalDate());
+		sub.setCreatedAt(Timestamp.valueOf((LocalDateTime)obj.get("createdAt")));
+		sub.setUpdatedAt(Timestamp.valueOf((LocalDateTime)obj.get("updatedAt")));
+		sub.setDeleteFlg((int)obj.get("deleteFlg"));
+		sub.setUsagePeriod(ChronoUnit.MONTHS.between(sub.getStartingDate(), LocalDate.now()));
+		return sub;
 	}
 
 }

@@ -5,9 +5,11 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import com.example.VFSS.entity.Subscription;
+import com.example.VFSS.exception.SubscriptionNotFoundException;
 import com.example.VFSS.repository.SubscriptionDAO;
 
 @Service
@@ -22,8 +24,11 @@ public class SubscriptionServiceImpl implements SubscriptionService {
 
 	@Override
 	public Optional<Subscription> findSubscription(int id) {
-		// TODO 自動生成されたメソッド・スタブ
-		return Optional.empty();
+		try {
+			return subscriptionDao.findSubscription(id);
+		} catch(EmptyResultDataAccessException e) {
+			throw new SubscriptionNotFoundException("指定されたIDのサービスが存在しません");
+		}
 	}
 
 	@Override

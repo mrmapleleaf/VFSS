@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.example.VFSS.entity.Subscription;
 import com.example.VFSS.entity.User;
 import com.example.VFSS.service.SubscriptionService;
+import com.example.VFSS.service.Validators.PagenationValidator;
 
 @Controller
 @RequestMapping("/mysubscriptions")
@@ -52,22 +53,28 @@ public class SubscriptionIndexController {
         HashMap<String, String> search = new HashMap<String, String>();
         search.put("limit", limit);
         search.put("page", currentPage);
+        	
+        	//「page=」に半角数字以外が使用されているかのチェック
+        PagenationValidator.invalidCharacterValidator(currentPage);
         
         User loginUser = (User)session.getAttribute("loginUser");
-		List<Subscription> subscriptionList = subscriptionService.findAllSubscriptions(loginUser.getId(), search);
-		//ページの総数取得
-        int total =subscriptionService.allSubscriptionsCount(loginUser.getId());
+		//登録サービスの総数取得
+		 int total =subscriptionService.allSubscriptionsCount(loginUser.getId());
+		 List<Subscription> subscriptionList = subscriptionService.findAllSubscriptions(loginUser.getId(), search);
         
-     // pagination処理
+		 // pagination処理
         // "総数/1ページの表示数"から総ページ数を割り出す
-        int totalPage = (total + Integer.valueOf(limit) - 1) / Integer.valueOf(limit);
+        int totalPage = (total + Integer.valueOf(limit) - 1) / Integer.valueOf(limit);    	
         int page = Integer.valueOf(currentPage);
         // 表示する最初のページ番号を算出（今回は3ページ表示する設定）
         // (例)1,2,3ページのstartPageは1。4,5,6ページのstartPageは4
         int startPage = page - (page - 1) % showPageSize;
         // 表示する最後のページ番号を算出
         int endPage = (startPage + showPageSize - 1 > totalPage) ? totalPage : startPage + showPageSize - 1;
-        
+        	
+     	//「page=」に総ページ数以上の数値が使用されているかのチェック
+        PagenationValidator.invalidPageValidator(page, totalPage);
+        	
 		model.addAttribute("subscriptionList", subscriptionList);
         model.addAttribute("total", total);
         model.addAttribute("page", page);

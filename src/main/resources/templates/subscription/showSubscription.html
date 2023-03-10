@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<link href="/css/header.css" th:href="@{/css/header.css}" rel="stylesheet">
+<link href="/css/footer.css" th:href="@{/css/footer.css}" rel="stylesheet">
+<link href="/css/content.css" th:href="@{/css/content.css}" rel="stylesheet">
+<title>登録サブスク詳細</title>
+</head>
+<body>
+	<div th:replace="common/header::header"></div>
+		<div class="content">
+			<h2>サブスク情報詳細</h2>
+			<table id="serviceDetails" th:inline="text" th:object="${subscription}">
+				<tbody>
+					<tr>
+						<th class="serviceNameDetailH">サブスク名</th>
+						<td class="serviceNameDetailD">[[${subscription.serviceName}]]</td>
+					</tr>
+					<tr>
+						<th class="startingDateDetailH">利用開始日付</th>
+						<td class="startingDateDetailD">[[${subscription.startingDate}]]</td>
+					</tr>
+					<tr>
+						<th class="usagePeriodDetailH">利用期間</th>
+						<td class="usagePeriodDetailD">[[${subscription.usagePeriod}]]ヶ月</td>
+					</tr>
+					<tr>
+						<th class="monthlyFeeDetailH">月額利用料</th>
+						<td class="monthlyFeeDetailD">[[${subscription.monthlyFee}]]円</td>
+					</tr>
+					<tr>
+						<th class="createdAtDetailH">登録日時</th>
+						<td class="createdAtDetailD">[[${#dates.format(subscription.createdAt, 'yyyy-MM-dd HH:mm:ss')}]]</td>
+					</tr>
+					<tr>
+						<th class="updatedAtDetailH">更新日時</th>
+						<td class="updatedAtDetailD">[[${#dates.format(subscription.updatedAt, 'yyyy-MM-dd HH:mm:ss')}]]</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	<div th:replace="common/footer::footer"></div>
+</body>
+</html>
