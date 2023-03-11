@@ -11,21 +11,24 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.example.VFSS.entity.Subscription;
 import com.example.VFSS.exception.SubscriptionNotFoundException;
+import com.example.VFSS.form.SubscriptionForm;
 import com.example.VFSS.service.SubscriptionService;
 
 @Controller
-@RequestMapping("/show")
-public class SubscriptionShowController {
+@RequestMapping("/edit")
+public class SubscriptionEditController {
 	
 	@Autowired
-	private SubscriptionService subscriptionService;
+	SubscriptionService subscriptionService;
 	
-	public SubscriptionShowController(SubscriptionService subscriptionService) {
+	public SubscriptionEditController(SubscriptionService subscriptionService) {
 		this.subscriptionService = subscriptionService;
 	}
+	
 
 	@GetMapping("/{id}")
-	public String goToDetails(@PathVariable String id, Model model) {
+	public String goToEditPage(SubscriptionForm subscriptionForm, 
+			@PathVariable String id, Model model) {
 		int numId = 0;
 		try {
 			numId = Integer.parseInt(id);
@@ -35,9 +38,15 @@ public class SubscriptionShowController {
 		
 		Optional<Subscription> subOpt = subscriptionService.findSubscription(numId);
 		Subscription sub = subOpt.orElseThrow(() -> new SubscriptionNotFoundException("指定されたIDのサブスクは存在しません"));
+
+		subscriptionForm.setServiceName(sub.getServiceName());
+		subscriptionForm.setMonthlyFee(String.valueOf(sub.getMonthlyFee()));
+		subscriptionForm.setStartingDate(String.valueOf(sub.getStartingDate()));
 		
-		model.addAttribute("subscription", sub);
+		model.addAttribute("subscriptionForm", sub);
 		
-		return "/subscription/showSubscription";
+		return "subscription/editSubscription";
 	}
+	
+	
 }

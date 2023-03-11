@@ -26,11 +26,14 @@ public class SubscriptionForm {
 		this.monthlyFee = monthlyFee;
 	}
 
+	public SubscriptionForm() {
+	}
+
 	public String getServiceName() {
 		return this.serviceName;
 	}
 
-	public void setSubscriptionName(String serviceName) {
+	public void setServiceName(String serviceName) {
 		this.serviceName = serviceName;
 	}
 	
