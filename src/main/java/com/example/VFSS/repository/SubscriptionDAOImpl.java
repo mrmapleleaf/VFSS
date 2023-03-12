@@ -61,8 +61,8 @@ public class SubscriptionDAOImpl implements SubscriptionDAO {
 	}
 
 	@Override
-	public int update(Subscription sub) {
-		// TODO 自動生成されたメソッド・スタブ
+	public int update(Subscription sub, int subscriptionId) {
+		
 		return 0;
 	}
 

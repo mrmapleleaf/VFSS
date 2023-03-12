@@ -16,7 +16,7 @@ public interface SubscriptionService {
 	
 	void  insert(Subscription sub);
 	
-	int update(Subscription sub);
+	int update(Subscription sub, int subscriptionId);
 	
 	int delete(int id);
 }

@@ -34,6 +34,7 @@
 				<div id="error_message" th:if="${#fields.hasErrors('monthlyFee')}" th:errors="*{monthlyFee}"></div>
 				<input type="text" name="monthlyFee" maxlength="10" th:value="*{monthlyFee}">円
 			</div>
+			<input th:if="${subscriptionId}" type="hidden" name="subscriptionId" th:value="${subscriptionId}">
 			<input id="register_subscription_button" type="submit" value="登録">
 		</form>
 	</div>

@@ -44,9 +44,8 @@ public class SubscriptionEditController {
 		subscriptionForm.setStartingDate(String.valueOf(sub.getStartingDate()));
 		
 		model.addAttribute("subscriptionForm", sub);
+		model.addAttribute("subscriptionId", sub.getId());
 		
 		return "subscription/editSubscription";
 	}
-	
-	
 }

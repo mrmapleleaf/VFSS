@@ -42,7 +42,7 @@ public class SubscriptionServiceImpl implements SubscriptionService {
 	}
 
 	@Override
-	public int update(Subscription sub) {
+	public int update(Subscription sub, int subscriptionId) {
 		// TODO 自動生成されたメソッド・スタブ
 		return 0;
 	}

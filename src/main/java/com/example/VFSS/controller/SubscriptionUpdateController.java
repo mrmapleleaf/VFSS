@@ -11,65 +11,58 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.VFSS.entity.Subscription;
-import com.example.VFSS.entity.User;
 import com.example.VFSS.form.SubscriptionForm;
 import com.example.VFSS.service.SubscriptionService;
 import com.example.VFSS.service.Validators.SubscriptionValidator;
 
 @Controller
-@RequestMapping("/register")
-public class SubscriptionCreateController {
+@RequestMapping("/subscription")
+public class SubscriptionUpdateController {
 	
 	@Autowired
-	private final SubscriptionService subscriptionService;
+	SubscriptionService subscriptionService;
 	@Autowired
 	HttpSession session;
 	
-	public SubscriptionCreateController(SubscriptionService subscriptionService) {
+	public SubscriptionUpdateController (SubscriptionService subscriptionService) {
 		this.subscriptionService = subscriptionService;
+		
 	}
 
-	@GetMapping
-	public String goToSubscriptionCreateForm(SubscriptionForm subscriptionForm, Model model) {
-		model.addAttribute("subscriptionForm,", subscriptionForm);
-		return "subscription/createSubscription";
-	}
-	
-	@PostMapping("/insert")
-	public String registerSubscription(@Valid @ModelAttribute SubscriptionForm subscriptionForm, BindingResult bindingResult
+	@PostMapping("update")
+	public String update(@Valid @ModelAttribute SubscriptionForm subscriptionForm, 
+			BindingResult bindingResult, @RequestParam("subscriptionId") int subscriptionId 
 			,Model model, RedirectAttributes redirectAttributes) {
 		
 		if(bindingResult.hasErrors()) {
 			model.addAttribute("subscriptionForm", subscriptionForm);
-			return "subscription/createSubscription";
+			model.addAttribute("subscriptionId", subscriptionId);
+			return "subscription/editSubscription";
 		}
 		
 		List<String> errorList = SubscriptionValidator.validate(subscriptionForm.getStartingDate(), subscriptionForm.getMonthlyFee());
 		if(errorList.size() != 0) {
 			model.addAttribute("errorList", errorList);
-			return "subscription/createSubscription";
+			model.addAttribute("subscriptionId", subscriptionId);
+			return "subscription/editSubscription";
 		}
-
-		User loginUser = (User)session.getAttribute("loginUser");
 		
 		Subscription subscription = new Subscription();
 		subscription.setServiceName(subscriptionForm.getServiceName());
 		subscription.setStartingDate(LocalDate.parse(subscriptionForm.getStartingDate()));
 		subscription.setMonthlyFee(Integer.parseInt(subscriptionForm.getMonthlyFee()));
-		subscription.setUsersId(loginUser.getId());
-		subscription.setCreatedAt(new Timestamp(System.currentTimeMillis()));
 		subscription.setUpdatedAt(new Timestamp(System.currentTimeMillis()));
 		
-		subscriptionService.insert(subscription);
+		subscriptionService.update(subscription, subscriptionId);
+		redirectAttributes.addFlashAttribute("UpdateCompletedMessage", "更新完了");
 		
-		redirectAttributes.addFlashAttribute("registerCompletedMessage", "サービス登録完了");
 		return "redirect:/mysubscriptions/index";
 	}
 }
