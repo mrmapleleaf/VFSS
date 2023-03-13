@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.VFSS.entity.Subscription;
+import com.example.VFSS.exception.SubscriptionNotFoundException;
 import com.example.VFSS.form.SubscriptionForm;
 import com.example.VFSS.service.SubscriptionService;
 import com.example.VFSS.service.Validators.SubscriptionValidator;
@@ -60,8 +61,11 @@ public class SubscriptionUpdateController {
 		subscription.setMonthlyFee(Integer.parseInt(subscriptionForm.getMonthlyFee()));
 		subscription.setUpdatedAt(new Timestamp(System.currentTimeMillis()));
 		
-		subscriptionService.update(subscription, subscriptionId);
-		redirectAttributes.addFlashAttribute("UpdateCompletedMessage", "更新完了");
+		if(subscriptionService.update(subscription, subscriptionId) == 0) {
+			throw new SubscriptionNotFoundException("指定されたIDのサブスクは存在しません");
+		}
+		
+		redirectAttributes.addFlashAttribute("updateCompletedMessage", "更新完了");
 		
 		return "redirect:/mysubscriptions/index";
 	}

@@ -49,6 +49,7 @@ public class SubscriptionDAOImpl implements SubscriptionDAO {
 			Subscription sub = subscriptionFactory(subObj);
 			subscriptionList.add(sub);
 		}
+		
 		return subscriptionList;
 	}
 
@@ -62,8 +63,10 @@ public class SubscriptionDAOImpl implements SubscriptionDAO {
 
 	@Override
 	public int update(Subscription sub, int subscriptionId) {
+		String sql = "update SUBSCRIPTIONS set serviceName = ?,monthlyFee = ?,startingDate = ?,updatedAt = ? "
+				+ "where id = ? and deleteFlg = 0";
 		
-		return 0;
+		return jdbcTemplate.update(sql, sub.getServiceName(), sub.getMonthlyFee(), sub.getStartingDate(), sub.getUpdatedAt(), subscriptionId);
 	}
 
 	@Override

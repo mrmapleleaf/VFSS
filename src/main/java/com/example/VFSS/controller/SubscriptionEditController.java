@@ -33,7 +33,7 @@ public class SubscriptionEditController {
 		try {
 			numId = Integer.parseInt(id);
 		} catch(NumberFormatException e) {
-			 new SubscriptionNotFoundException("指定されたIDのサブスクは存在しません");
+			 throw new SubscriptionNotFoundException("指定されたIDのサブスクは存在しません");
 		}
 		
 		Optional<Subscription> subOpt = subscriptionService.findSubscription(numId);

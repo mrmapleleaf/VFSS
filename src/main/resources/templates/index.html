@@ -18,6 +18,7 @@
 		<div class="content" th:if="!${#lists.isEmpty(subscriptionList)}">
 			<h1 th:if="${loginMessage != null}" th:text="${loginMessage}"></h1>
 			<h1 th:if="${errorMessage != null}" th:text="${errorMessage}"></h1>
+			<h1 th:if="${updateCompletedMessage != null}" th:text="${updateCompletedMessage}"></h1>
 			<h1 th:if="${registerCompletedMessage != null}" th:text="${registerCompletedMessage}"></h1>
 			<h2>使用サブスク一覧</h2>
 			<p th:text="|ユーザーID：${session.loginUser.userId}|"></p>
