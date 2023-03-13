@@ -1,10 +1,8 @@
 @charset "UTF-8";
 
 .content {
-	height : auto;
-	margin-left: 20px;
-	margin-right: 20px;
-	margin-bottom: 20px;
+	height : 100%;
+	margin : 20px;
 }
 
 #login_error_message {
@@ -15,11 +13,6 @@
 	color :rgb(255, 148, 131);
 }
 
-#create_user_body {
-	margin-left: 20px;
-	margin-bottom: 20px;
-}
-
 #create_userId {
 	margin-top: 15px;
 	margin-bottom: 15px;
@@ -28,11 +21,6 @@
 #create_user_button {
 	padding: 3px 25px 3px 25px;
 	margin-top: 10px;
-}
-
-#login_body {
-	margin-left: 20px;
-	margin-bottom: 20px;
 }
 
 #login_userId {
@@ -55,6 +43,8 @@
 }
 
 table {
+	margin-top:20px;
+	margin-bottom: 20px;
 	width: 100%;
 }
 
@@ -76,11 +66,6 @@ table#mySubscriptionsList th {
 	padding: 20px;
 }
 
-#register_subscription_body {
-	margin-left: 20px;
-	margin-bottom: 20px;
-}
-
 #register_service_name {
 	margin-top: 15px;
 	margin-bottom: 15px;
@@ -100,11 +85,51 @@ table#mySubscriptionsList th {
 	color :rgb(255, 148, 131);
 }
 
-.pagination {
-	margin-top: 20px;
-}
-
 #serviceDetails{
 	margin-top:20px;
 	margin-bottom:20px;
 }
+.editForm {
+	display       : inline-block;
+}
+
+.editBtn {
+	 display       : inline-block;
+  font-size     : 11pt;        /* 文字サイズ */
+  text-align    : center;      /* 文字位置   */
+  cursor        : pointer;     /* カーソル   */
+  padding       : 12px 12px;   /* 余白       */
+  background    : #d9d9d9;     /* 背景色     */
+  color         : #ffffff;     /* 文字色     */
+  line-height   : 1em;         /* 1行の高さ  */
+  transition    : .3s;         /* なめらか変化 */
+  border        : 2px solid #d9d9d9;    /* 枠の指定 */
+}
+
+.editBtn:hover {
+	color         : #d9d9d9;     /* 背景色     */
+  background    : #ffffff;     /* 文字色     */
+}
+
+.deleteForm {
+	display       : inline-block;
+}
+
+.deleteBtn {
+	display       : inline-block;
+  font-size     : 11pt;        /* 文字サイズ */
+  text-align    : center;      /* 文字位置   */
+  cursor        : pointer;     /* カーソル   */
+  padding       : 12px 12px;   /* 余白       */
+  background    : #d9d9d9;     /* 背景色     */
+  color         : #ffffff;     /* 文字色     */
+  line-height   : 1em;         /* 1行の高さ  */
+  transition    : .3s;         /* なめらか変化 */
+  border        : 2px solid #d9d9d9;    /* 枠の指定 */
+  }
+  
+  .deleteBtn:hover {
+	color         : #d9d9d9;     /* 背景色     */
+  background    : #ffffff;     /* 文字色     */
+}
+	

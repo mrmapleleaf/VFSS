@@ -37,8 +37,8 @@ public class SubscriptionUpdateController {
 		
 	}
 
-	@PostMapping("update")
-	public String update(@Valid @ModelAttribute SubscriptionForm subscriptionForm, 
+	@PostMapping("/update")
+	public String updateSubscription(@Valid @ModelAttribute SubscriptionForm subscriptionForm, 
 			BindingResult bindingResult, @RequestParam("subscriptionId") int subscriptionId 
 			,Model model, RedirectAttributes redirectAttributes) {
 		

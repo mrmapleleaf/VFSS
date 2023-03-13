@@ -9,7 +9,7 @@
 </head>
 <body>
 	<div th:replace="common/header::header"></div>
-	<div id="register_subscription_body">
+	<div class="content">
 		<h1>サブスク登録</h1>
 		<div th:if = "!${#lists.isEmpty(errorList)}"> 
 			<div  th:if = "${#lists.size(errorList) != 0}"> 

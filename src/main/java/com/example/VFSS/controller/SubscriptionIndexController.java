@@ -24,7 +24,7 @@ import com.example.VFSS.service.Validators.PagenationValidator;
 public class SubscriptionIndexController {
 	
 	/** １ページの表示数 */
-    private final String limit = "3";
+    private final String limit = "10";
 
     /** ページネーションで表示するページ数 */
     private int showPageSize = 3;

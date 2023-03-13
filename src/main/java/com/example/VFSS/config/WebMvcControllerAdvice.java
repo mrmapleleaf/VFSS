@@ -19,11 +19,11 @@ public class WebMvcControllerAdvice {
 	
 	@ExceptionHandler(InvalidPagenationException.class)
 	public String handleException(InvalidPagenationException e) {
-		return "errorPage/customPage";
+		return "error";
 	}
 	
 	@ExceptionHandler(SubscriptionNotFoundException.class)
 	public String handleException(SubscriptionNotFoundException e) {
-		return "errorPage/customPage";
+		return "error";
 	}
 }

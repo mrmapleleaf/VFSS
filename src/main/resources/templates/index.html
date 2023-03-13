@@ -20,9 +20,8 @@
 			<h1 th:if="${errorMessage != null}" th:text="${errorMessage}"></h1>
 			<h1 th:if="${updateCompletedMessage != null}" th:text="${updateCompletedMessage}"></h1>
 			<h1 th:if="${registerCompletedMessage != null}" th:text="${registerCompletedMessage}"></h1>
-			<h2>使用サブスク一覧</h2>
-			<p th:text="|ユーザーID：${session.loginUser.userId}|"></p>
-			<p th:text="|アカウント作成日付：${session.loginUser.createdAt}|"></p>
+			<h1 th:if="${deleteCompletedMessage != null}" th:text="${deleteCompletedMessage}"></h1>
+			<h1>使用サブスク一覧</h1>
 			<table id="mySubscriptionsList" >
 				<tr>
 					<th class="serviceName">サブスク名</th>
@@ -70,7 +69,8 @@
 		<div class="content" th:if="${#lists.isEmpty(subscriptionList)}">
 			<h1 th:if="${loginMessage != null}" th:text="${loginMessage}"></h1>
 			<h1 th:if="${errorMessage != null}" th:text="${errorMessage}"></h1>
-			<h2>使用サブスク一覧</h2>
+			<h1 th:if="${deleteCompletedMessage != null}" th:text="${deleteCompletedMessage}"></h1>
+			<h1>使用サブスク一覧</h1>
 			<p>サブスクサービスが未登録です。自分が使っているサービスを登録してみよう！</p>
 		</div>
 	<div th:replace="common/footer::footer"></div>

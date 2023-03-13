@@ -10,7 +10,7 @@
 <body>
 	<div th:replace="common/header::header"></div>
 	<div class="content"  th:object="${subscription}">
-		<h2>サブスク情報詳細</h2>
+		<h1>サブスク情報詳細</h1>
 		<table id="serviceDetails" th:inline="text">
 			<tbody>
 				<tr>
@@ -26,8 +26,12 @@
 					<td class="usagePeriodDetailD">[[${subscription.usagePeriod}]]ヶ月</td>
 				</tr>
 				<tr>
-					<th class="monthlyFeeDetailH">月額利用料</th>
+					<th class="monthlyFeeDetailH">月額料金</th>
 					<td class="monthlyFeeDetailD">[[${subscription.monthlyFee}]]円</td>
+				</tr>
+				<tr>
+					<th class="totalH">累積利用金額</th>
+					<td class="totalD">[[${subscription.monthlyFee} * ${subscription.usagePeriod}]]円</td>
 				</tr>
 				<tr>
 					<th class="createdAtDetailH">登録日時</th>
@@ -40,10 +44,16 @@
 			</tbody>
 		</table>
 		<div class="detailPageLinks">
-			<p><a href="#" th:href="@{/edit/{id}(id=${subscription.id})}">登録内容を編集する</a></p><br>
-			<p><a>登録内容の削除</a></p><br>
-			<p>一覧へ戻る</p>
-		</div>
+			<form class="editForm" method="POST" th:action="@{/subscription/edit}">
+				<input type="submit" class="editBtn" value="編集する">
+				<input type="hidden" name="subscriptionId" th:value="${subscription.id}">
+			</form>
+			<form class="deleteForm" method="POST" th:action="@{/subscription/delete}">
+				<input type="submit" class="deleteBtn" value="削除する">
+				<input type="hidden" name="subscriptionId" th:value="${subscription.id}">
+			</form>
+		</div><br>
+		<p><a href="#" th:href="@{/mysubscriptions/index}">一覧へ戻る</a></p>
 	</div>
 	<div th:replace="common/footer::footer"></div>
 </body>

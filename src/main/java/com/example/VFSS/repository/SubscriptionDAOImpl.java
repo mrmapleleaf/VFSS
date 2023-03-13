@@ -71,8 +71,8 @@ public class SubscriptionDAOImpl implements SubscriptionDAO {
 
 	@Override
 	public int delete(int id) {
-		// TODO 自動生成されたメソッド・スタブ
-		return 0;
+		String sql = "update SUBSCRIPTIONS set deleteFlg = 1 where id = ? and deleteFlg = 0";
+		return jdbcTemplate.update(sql, id);
 	}
 
 	@Override
